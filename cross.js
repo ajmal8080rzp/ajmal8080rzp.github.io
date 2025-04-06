@@ -1,3 +1,1 @@
-alert('xss');
-alert(document.domain);
-
+alert(origin + ' is vulnerable to XSS');
