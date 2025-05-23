@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Notification Library Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Popup Notification Library Demo</h1>
+  
+  <div class="demo-section">
+    <h2>Basic Demo</h2>
+    <p>Click the buttons below to see different types of notifications:</p>
+    <div class="controls">
+      <button onclick="showNotification('info')">Info Notification</button>
+      <button class="success" onclick="showNotification('success')">Success Notification</button>
+      <button class="error" onclick="showNotification('error')">Error Notification</button>
+      <button class="warning" onclick="showNotification('warning')">Warning Notification</button>
+    </div>
+    
+    <h3>Position</h3>
+    <div class="controls">
+      <button onclick="changePosition('top-right')">Top Right</button>
+      <button onclick="changePosition('top-left')">Top Left</button>
+    </div>
+  </div>
+  
+
+  <div class="demo-section">
+    <h2>Installation</h2>
+    <div class="code-block">
+      <pre><code>&lt;script src="../sdk/popup-notification.js"&gt;&lt;/script&gt;</code></pre>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <h2>Basic Usage</h2>
+    <div class="code-block">
+      <pre><code>// Initialize the library
+const notifications = new PopupNotification({
+  position: 'top-right',  // top-right, top-left
+  duration: 3000,         // Time in ms before notification disappears
+  maxNotifications: 5,    // Maximum number of notifications to show at once
+});
+
+// Show different types of notifications
+notifications.info('Info Title', 'This is an info message');
+notifications.success('Success!', 'Operation completed successfully');
+notifications.error('Error!', 'Something went wrong');
+notifications.warning('Warning!', 'Please be careful');</code></pre>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <h2>PostMessage API</h2>
+    <p>You can trigger notifications from other windows or iframes using the postMessage API:</p>
+    <div class="code-block">
+      <pre><code>// From another window or iframe
+window.parent.postMessage({
+  type: 'notification',
+  title: 'Hello from iframe!',
+  message: 'This notification was sent using postMessage',
+  notificationType: 'success', // info, success, error, warning
+  duration: 5000 // optional
+}, '*');</code></pre>
+    </div>
+  </div>
+  
+  <script src="../sdk/popup-notification.js"></script>
+  <script>
+    // Initialize the notification library
+    let notifications = new PopupNotification({
+      position: 'top-right',
+      duration: 5000,
+      maxNotifications: 5
+    });
+    
+    // Function to show a notification
+    function showNotification(type) {
+      const titles = {
+        info: 'Information',
+        success: 'Success!',
+        error: 'Error!',
+        warning: 'Warning!'
+      };
+      
+      const messages = {
+        info: 'This is an informational notification.',
+        success: 'Operation completed successfully!',
+        error: 'Something went wrong. Please try again.',
+        warning: 'Please proceed with caution.'
+      };
+      
+      switch(type) {
+        case 'info':
+          notifications.info(titles.info, messages.info);
+          break;
+        case 'success':
+          notifications.success(titles.success, messages.success);
+          break;
+        case 'error':
+          notifications.error(titles.error, messages.error);
+          break;
+        case 'warning':
+          notifications.warning(titles.warning, messages.warning);
+          break;
+      }
+    }
+    
+    // Function to change notification position
+    function changePosition(position) {
+      // Recreate the notification instance with new position
+      notifications = new PopupNotification({
+        position: position,
+        duration: 5000,
+        maxNotifications: 5
+      });
+      
+      // Show a notification in the new position
+      notifications.info('Position Changed', `Notifications will now appear in the ${position} position`);
+    }
+    
+  </script>
+</body>
+</html> 
