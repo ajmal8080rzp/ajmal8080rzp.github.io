@@ -71,7 +71,7 @@ window.parent.postMessage({
 
 ## Demo
 
-Open the `demo/index.html` file in your browser to see a live demo of the library.
+Open the [./index.html](./index.html) file in your browser to see a live demo of the library.
 
 ## License
 
