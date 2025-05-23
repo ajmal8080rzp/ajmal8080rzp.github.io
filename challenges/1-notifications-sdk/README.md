@@ -71,7 +71,7 @@ window.parent.postMessage({
 
 ## Demo
 
-Open the [./index.html](./index.html) file in your browser to see a live demo of the library.
+Open the [https://ajmal8080rzp.github.io/challenges/1-notifications-sdk/](https://ajmal8080rzp.github.io/challenges/1-notifications-sdk/) file in your browser to see a live demo of the library.
 
 ## License
 
