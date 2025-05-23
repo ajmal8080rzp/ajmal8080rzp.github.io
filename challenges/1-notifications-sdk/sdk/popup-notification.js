@@ -14,7 +14,6 @@ class PopupNotification {
       containerClass: options.containerClass || 'popup-notification-container',
       notificationClass: options.notificationClass || 'popup-notification',
       zIndex: options.zIndex || 9999,
-      targetOrigin: options.targetOrigin || '*',
     };
     
     this.notifications = [];
@@ -126,12 +125,7 @@ class PopupNotification {
     window.addEventListener('message', (event) => {
       if (DEBUG) {
         console.log('Received message:', event);
-      }
-      
-      // Check origin if specified and not wildcard
-      if (this.options.targetOrigin !== '*' && event.origin !== this.options.targetOrigin) {
-        return;
-      }
+      }      
       
       const { data } = event;
       
